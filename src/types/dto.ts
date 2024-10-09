@@ -1,3 +1,9 @@
+export interface Forecast {
+    daily: DailyForecast[]
+    hourly: HourlyForecast[]
+    timezone: string
+}
+
 export interface Weather {
     id: number;
     main: string;
@@ -53,11 +59,11 @@ export interface HourlyForecast {
 }
 
 export interface City {
-    city_id: number;
+    city_id: string;
     city_name: string;
     state_code: string;
     country_code: string;
     country_full: string;
-    lat: number;
-    lon: number;
+    lat: string;
+    lon: string;
 }

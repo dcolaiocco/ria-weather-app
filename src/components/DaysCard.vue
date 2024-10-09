@@ -8,7 +8,7 @@
       </v-card-title>
     </v-card-item>
 
-    <v-skeleton-loader v-if="loading" type="card" />
+    <v-skeleton-loader v-if="!daily || loading" type="card" />
     <v-list
       v-else
       lines="two"
@@ -19,7 +19,11 @@
         class="py-0"
       >
         <template #prepend>
-          <v-avatar :image="item.prependAvatar" />
+          <v-avatar
+            color="#00FFFFAA"
+            rounded="2"
+            :image="item.prependAvatar"
+          />
         </template>
         <template #title>
           <div>{{ item.title }}</div>
@@ -52,7 +56,7 @@
   }
 
   const props = defineProps<{
-    daily: DailyForecast[]
+    daily: DailyForecast[] | undefined
     timezone: string;
     loading: boolean;
   }>()
@@ -67,6 +71,9 @@
 
   const items: ComputedRef<ListItemProps[]> = computed(() => {
     const processedListItems: ListItemProps[] = []
+    if (!props.daily) {
+      return processedListItems
+    }
     for (const dailyForecast of props.daily.slice(0, 5)) {
       const newItem = {
         prependAvatar: getWeatherImageSource(dailyForecast.weather),

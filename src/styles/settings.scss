@@ -6,5 +6,8 @@
 
 // https://vuetifyjs.com/features/sass-variables/`
 @use 'vuetify/settings' with (
-    $slide-group-prev-basis: 24px
+    $slide-group-prev-basis: 24px,
+    // $card-background: #00ffff,
+    // $card-color: #00ffff,
+    // $theme-surface: #00ffff
 );

@@ -8,7 +8,7 @@
         Next hours
       </v-card-title>
     </v-card-item>
-    <v-skeleton-loader v-if="loading" type="card" />
+    <v-skeleton-loader v-if="!hourly || loading" type="card" />
     <!-- <div class="dimensions"></div> -->
     <v-sheet
       v-else
@@ -28,8 +28,12 @@
           >
             <div class="d-flex flex-column fill-height align-center justify-center">
               <div>{{ Math.round(hourlyForecast.temp) }}°</div>
-              <div>{{ Math.round(hourlyForecast.humidity) }}%</div>
-              <v-avatar :image="getWeatherImageSource(hourlyForecast.weather)" />
+              <div style="color: #00FFFFAA;">{{ Math.round(hourlyForecast.humidity) }}%</div>
+              <v-avatar
+                color="#00FFFFAA"
+                rounded="2"
+                :image="getWeatherImageSource(hourlyForecast.weather)"
+              />
               <div>{{ formatter.format(new Date(hourlyForecast.dt* 1000)) }}</div>
             </div>
           </v-card>
@@ -44,7 +48,7 @@
   import { getWeatherImageSource } from '@/util'
 
   const props = defineProps<{
-    hourly: HourlyForecast[];
+    hourly: HourlyForecast[] | undefined;
     timezone: string;
     loading: boolean;
   }>()
@@ -60,7 +64,5 @@
 </script>
 
 <style scoped lang="css">
-.v-slide-group__prev {
-  min-width: 0px;
-}
+
 </style>
